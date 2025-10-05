@@ -337,77 +337,107 @@ details.project-item    .skill-tag:hover { background: #5a6eea; }
 }
 .print-btn:hover { box-shadow: 0 4px 10px rgba(0,0,0,.2); }
 
-/* ===== Print styles (color-accurate) ===== */
+/* ===================== PRINT (US Letter, compact, color-accurate) ===================== */
 @media print {
-  /* Page size & margins */
+  /* Page size & margins (US Letter 8.5x11in) */
   @page {
-    size: A4;
-    margin: 12mm;
+    size: 8.5in 11in;
+    margin: 0.5in;  /* roughly 12.7mm margins for balance */
   }
 
-  /* Force the print engine to keep colors/gradients */
   html, body, header, .container, .content, section, details, summary {
-    -webkit-print-color-adjust: exact !important; /* Chrome/Safari */
-    print-color-adjust: exact !important;         /* Firefox/Edge */
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
     color-adjust: exact !important;
   }
 
-  /* Keep your gradient header in print */
+  /* --- General compact layout --- */
+  body { background: #fff !important; }
+  .container, .content, section {
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+  .content { padding: 0 !important; }
+  section { margin-bottom: 16px !important; }
+  h2 { margin: 0 0 8px !important; padding-bottom: 6px !important; border-bottom-width: 2px !important; }
+
+  /* --- Header (horizontal + plain URLs for print) --- */
   header {
     background: linear-gradient(135deg,#667eea 0%,#764ba2 100%) !important;
     color: #fff !important;
+    padding: 14px 16px !important;
+    text-align: left !important;
+  }
+  .header-content {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 12px !important;
+    flex-wrap: nowrap !important;
+    text-align: left !important;
+  }
+  .profile-photo {
+    width: 70px !important;
+    height: 70px !important;
+    border-width: 2px !important;
     box-shadow: none !important;
   }
+  header h1 { font-size: 20pt !important; margin: 0 0 2px !important; }
+  header p  { font-size: 11pt !important; margin: 0 0 4px !important; }
 
-  /* Preserve card header backgrounds (the light purple bar) */
-  details.experience-item summary,
-  details.education-item summary,
-  details.project-item summary {
-    background: #f3f4fb !important;
-    border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+  /* Contact URLs instead of buttons */
+  .contact-info a {
+    background: none !important;
+    color: #fff !important;
+    padding: 0 !important;
+    text-decoration: none !important;
+    display: block !important;
+    font-size: 9.5pt !important;
+    line-height: 1.3 !important;
   }
+  .contact-info a[href*="linkedin"]::after { content: " — " attr(href); }
+  .contact-info a[href*="github"]::after   { content: " — " attr(href); }
+  .contact-info a[href^="mailto"]::after   { content: " — " attr(href); }
 
-  /* Body backgrounds should stay white (no grey wash) */
-  .container, .content, section, details > :not(summary) {
-    background: #ffffff !important;
-    box-shadow: none !important;
-  }
-
-  /* Hide interactive-only UI */
-  .print-btn,
-  .contact-info a[target="_blank"]::after {
-    display: none !important;
-  }
-
-  /* Prevent ugly page breaks inside cards */
+  /* --- Card handling (split allowed) --- */
   details,
   .experience-item,
   .education-item,
   .project-item {
-    break-inside: avoid;
-    page-break-inside: avoid;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+    border-color: #ccc !important;
+    box-shadow: none !important;
+  }
+  details summary {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+    background: #f3f4fb !important;
+    padding: 10px 12px !important;
+  }
+  details > :not(summary) {
+    padding: 8px 12px 10px 18px !important;
   }
 
-  /* Tighten spacing for print */
-  .content { padding: 0 !important; }
-  section { margin-bottom: 18px !important; }
-  h2 { margin: 0 0 10px !important; padding-bottom: 6px !important; border-bottom-width: 2px !important; }
-
-  /* Lists & chips */
-  ul { margin: 6px 0 8px 20px !important; }
-  .skills, .project-tags, details .skills {
-    border: 1px solid #d9defe !important;
+  /* --- Compact text, headers, and chips --- */
+  p, li { font-size: 10pt !important; line-height: 1.35 !important; }
+  details summary h3 { font-size: 12.5pt !important; }
+  details summary h4 { font-size: 10.5pt !important; }
+  .skills-header { text-align: center !important; margin: 10px 0 6px !important; }
+  .skills, .project-tags {
     background: #f6f7ff !important;
+    border: 1px solid rgba(75,95,217,0.18) !important;
+    padding: 8px 10px !important;
+    border-radius: 10px !important;
   }
-
-  /* Keep your brand accents readable */
-  h2, .skills-header { color: #4b5fd9 !important; }
   .skill-tag, .project-tags .tag {
     background: #667eea !important;
     color: #fff !important;
+    font-size: 8.5pt !important;
+    padding: 4px 8px !important;
   }
 
-  /* Avoid widows/orphans if supported */
+  /* Prevent widows/orphans */
   p, li, h3, h4 { orphans: 2; widows: 2; }
 }
 
