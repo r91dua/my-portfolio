@@ -294,3 +294,127 @@ details.education-item  .skill-tag {
     padding: 6px 9px;
   }
 }
+
+/* ==== FINAL OVERRIDES — Experience & Education cards ==== */
+
+/* Header (summary): left arrow, stacked text, header background */
+section#experience details.experience-item > summary,
+section#education  details.education-item > summary {
+  display: grid !important;
+  grid-template-columns: 24px 1fr !important; /* [arrow] [text] */
+  column-gap: 12px;
+  align-items: center;
+  padding: 16px 20px !important;
+  list-style: none;
+  background-color: #eaebf2 !important;      /* distinct header bg */
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  cursor: pointer;
+}
+section#experience details.experience-item > summary::-webkit-details-marker,
+section#education  details.education-item  > summary::-webkit-details-marker { display: none !important; }
+section#experience details.experience-item > summary::marker,
+section#education  details.education-item  > summary::marker { content: "" !important; }
+
+/* Left arrow */
+section#experience details.experience-item > summary::before,
+section#education  details.education-item  > summary::before {
+  content: "▸";
+  font-size: 1.2em;
+  color: #667eea;
+  justify-self: center;
+  align-self: center;
+  transition: transform .25s ease, color .25s ease, opacity .25s ease;
+  opacity: .9;
+}
+section#experience details.experience-item[open] > summary::before,
+section#education  details.education-item[open]  > summary::before {
+  transform: rotate(90deg);
+  color: #4b5fd9;
+  opacity: 1;
+}
+
+/* Make header text live in column 2 */
+section#experience details.experience-item > summary > *,
+section#education  details.education-item  > summary > * {
+  grid-column: 2 !important;
+  margin: 0;
+}
+
+/* Hover/open header tint */
+section#experience details.experience-item > summary:hover,
+section#education  details.education-item  > summary:hover { background-color: #eef2ff !important; }
+section#experience details.experience-item[open] > summary,
+section#education  details.education-item[open]  > summary { background-color: #eef2ff !important; }
+
+/* Card body padding (everything under summary) */
+section#experience details.experience-item > :not(summary),
+section#education  details.education-item  > :not(summary) {
+  padding: 14px 22px 18px 45px !important;  /* aligns with arrow column */
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Lists inside cards */
+section#experience details.experience-item ul,
+section#education  details.education-item  ul {
+  margin: 6px 8px 14px 6px !important; /* relative to padded body above */
+  padding-left: 18px !important;
+}
+
+/* Skills header inside cards */
+section#experience details.experience-item .skills-header,
+section#education  details.education-item  .skills-header {
+  font-size: 1.1em;
+  color: #667eea;
+  font-weight: 700;
+  margin: 12px 0 8px;
+}
+
+/* Skills grid inside cards (override global .skills flex) */
+section#experience details.experience-item .skills,
+section#education  details.education-item  .skills {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+  gap: 8px 10px !important;
+  padding: 12px !important;
+  margin: 0 !important;
+  background: #f7f8ff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 10px;
+}
+
+/* Chips inside cards (slightly smaller) */
+section#experience details.experience-item .skill-tag,
+section#education  details.education-item  .skill-tag {
+  font-size: .86em !important;
+  padding: 6px 10px !important;
+  border-radius: 16px !important;
+  white-space: nowrap;
+}
+
+/* Rotation headings center */
+section#experience details.experience-item h5 {
+  text-align: center;
+  margin: 15px auto 8px;
+  font-weight: 600;
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  section#experience details.experience-item > :not(summary),
+  section#education  details.education-item  > :not(summary) {
+    padding: 12px 16px 16px 42px;
+  }
+  section#experience details.experience-item .skills,
+  section#education  details.education-item  .skills {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+    gap: 8px;
+    padding: 10px !important;
+  }
+  section#experience details.experience-item .skill-tag,
+  section#education  details.education-item  .skill-tag {
+    font-size: .84em !important;
+    padding: 6px 9px !important;
+  }
+}
+
