@@ -228,32 +228,26 @@ details.experience-item h5 {
 }
 
 /* ===========================================================
-   Skills Section inside Cards (improved)
+   Skills Section inside Cards (IMPROVED)
    =========================================================== */
 
-/* Skills header */
+/* Skills header — now properly aligned and styled */
 details.experience-item .skills-header,
 details.education-item  .skills-header {
   font-size: 1.1em;
   font-weight: 700;
   color: #4b5fd9;
-  margin: 12px 0 10px;
-  padding-left: 45px;  /* <<< matches body indentation */
+  margin: 18px 0 8px;
+  padding-left: 60px;   /* <<< aligns with bullets */
   display: flex;
   align-items: center;
-}
-
-/* Divider before skills */
-details.experience-item ul + .skills-header::before,
-details.education-item  ul + .skills-header::before {
-  content: "";
-  display: block;
-  height: 1px;
-  background: rgba(0,0,0,0.08);
-  margin-bottom: 12px;
-  border-radius: 1px;
-  width: calc(100% - 60px);
-  margin-left: 45px;
+  background: #f8f9ff;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: calc(100% - 40px);
+  border-radius: 8px;
 }
 
 /* Skills container */
@@ -262,11 +256,10 @@ details.education-item  .skills {
   display: flex;
   flex-wrap: wrap;
   gap: 10px 12px;
-  padding: 12px 20px 12px 45px; /* aligned with content */
+  padding: 12px 25px 18px 60px; /* aligned with text */
   margin-bottom: 10px;
   background: #f6f7ff;
-  border: 1px solid rgba(75,95,217,0.18);
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
 }
 
 /* Individual skill tag */
@@ -279,18 +272,17 @@ details.education-item  .skill-tag {
   font-size: 0.9em;
   font-weight: 500;
   border-radius: 9999px;
-  color: #2e3ba8;
-  background: rgba(102,126,234,0.16);
-  border: 1px solid rgba(102,126,234,0.3);
-  transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
+  color: #fff;
+  background: #667eea;
+  border: none;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  transition: background 0.2s ease, transform 0.05s ease;
   text-align: center;
-  min-width: fit-content;
 }
 
 details.experience-item .skill-tag:hover,
 details.education-item  .skill-tag:hover {
-  background: rgba(102,126,234,0.25);
-  border-color: rgba(102,126,234,0.4);
+  background: #4b5fd9;
 }
 
 details.experience-item .skill-tag:active,
