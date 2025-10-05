@@ -1,23 +1,129 @@
-/* ========== Base Reset & Layout ========== */
+/* =========================================================
+   THEME TOKENS (Light defaults)
+   ========================================================= */
+:root {
+  /* Brand / accents */
+  --accent: #667eea;
+  --accent-strong: #4b5fd9;
+  --accent-start: #667eea;
+  --accent-end: #764ba2;
+
+  /* Base & text */
+  --bg: #f4f4f4;
+  --text: #1d2430;
+  --muted: #5f6673;
+
+  /* Cards */
+  --card-bg: #ffffff;
+  --card-border: rgba(0,0,0,0.10);
+  --card-shadow: 0 2px 4px rgba(0,0,0,0.05);
+
+  /* Summaries (card headers) */
+  --summary-bg: #f3f4fb;
+  --summary-hover: #eef2ff;
+
+  /* Chips / skills panel */
+  --chip-panel-bg: #f6f7ff;
+  --chip-panel-border: rgba(75,95,217,0.18);
+  --chip-bg: #667eea;
+  --chip-text: #ffffff;
+
+  /* Footer */
+  --footer-bg: #333333;
+  --footer-text: #ffffff;
+
+  /* Header pills (contact) */
+  --pill-bg: rgba(255,255,255,0.20);
+  --pill-bg-hover: rgba(255,255,255,0.30);
+
+  /* Borders / dividers */
+  --divider: rgba(0,0,0,0.08);
+}
+
+/* =========================================================
+   DARK THEME TOKENS
+   - Auto: respects OS dark preference
+   - Manual: add [data-theme="dark"] on <html> or <body>
+   ========================================================= */
+/* Auto dark (unless an explicit data-theme forces light) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1116;
+    --text: #e6e9ee;
+    --muted: #b6bdc8;
+
+    --card-bg: #171b22;
+    --card-border: rgba(255,255,255,0.09);
+    --card-shadow: 0 2px 6px rgba(0,0,0,0.35);
+
+    --summary-bg: #1c2230;
+    --summary-hover: #222b3d;
+
+    --chip-panel-bg: #121722;
+    --chip-panel-border: rgba(102,125,255,0.28);
+    --chip-bg: #5a6eea;  /* slightly brighter for contrast */
+    --chip-text: #ffffff;
+
+    --footer-bg: #0b0e13;
+    --footer-text: #e6e9ee;
+
+    --pill-bg: rgba(255,255,255,0.12);
+    --pill-bg-hover: rgba(255,255,255,0.20);
+
+    --divider: rgba(255,255,255,0.12);
+  }
+}
+/* Manual force dark */
+[data-theme="dark"] {
+  --bg: #0e1116;
+  --text: #e6e9ee;
+  --muted: #b6bdc8;
+
+  --card-bg: #171b22;
+  --card-border: rgba(255,255,255,0.09);
+  --card-shadow: 0 2px 6px rgba(0,0,0,0.35);
+
+  --summary-bg: #1c2230;
+  --summary-hover: #222b3d;
+
+  --chip-panel-bg: #121722;
+  --chip-panel-border: rgba(102,125,255,0.28);
+  --chip-bg: #5a6eea;
+  --chip-text: #ffffff;
+
+  --footer-bg: #0b0e13;
+  --footer-text: #e6e9ee;
+
+  --pill-bg: rgba(255,255,255,0.12);
+  --pill-bg-hover: rgba(255,255,255,0.20);
+
+  --divider: rgba(255,255,255,0.12);
+}
+
+/* =========================================================
+   Base Reset & Layout
+   ========================================================= */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: #333;
-  background: #f4f4f4;
+  color: var(--text);
+  background: var(--bg);
 }
 
 .container {
   max-width: 1000px;
   margin: 0 auto;
-  background: #fff;
+  background: var(--card-bg);
   box-shadow: 0 0 20px rgba(0,0,0,.1);
 }
 
-/* ========== Header ========== */
+/* =========================================================
+   Header
+   ========================================================= */
 header {
-  background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  background: linear-gradient(135deg, var(--accent-start) 0%, var(--accent-end) 100%);
   color: #fff;
   padding: 60px 40px;
   text-align: center;
@@ -32,10 +138,14 @@ header p  { font-size: 1.2em; margin-bottom: 20px; }
   flex-wrap: wrap;
 }
 .contact-info a {
-  color: #fff; text-decoration: none; padding: 8px 15px;
-  background: rgba(255,255,255,.2); border-radius: 5px; transition: .3s;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 15px;
+  background: var(--pill-bg);
+  border-radius: 5px;
+  transition: .3s;
 }
-.contact-info a:hover { background: rgba(255,255,255,.3); }
+.contact-info a:hover { background: var(--pill-bg-hover); }
 
 /* ===== Profile Header Layout ===== */
 .header-content {
@@ -70,29 +180,37 @@ header p  { font-size: 1.2em; margin-bottom: 20px; }
 }
 
 @media (max-width: 768px) {
-  .header-content {
-    flex-direction: column;
-    text-align: center;
-  }
-  .profile-photo {
-    width: 100px;
-    height: 100px;
-  }
+  .header-content { flex-direction: column; text-align: center; }
+  .profile-photo { width: 100px; height: 100px; }
 }
 
-/* ========== Content ========== */
+/* =========================================================
+   Content
+   ========================================================= */
 .content { padding: 40px; }
 section  { margin-bottom: 40px; }
 
 h2 {
-  color: #667eea; font-size: 1.8em; margin-bottom: 20px;
-  padding-bottom: 10px; border-bottom: 3px solid #667eea;
+  color: var(--accent);
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--accent);
 }
 
-/* ========== Footer ========== */
-footer { background:#333; color:#fff; text-align:center; padding:20px; }
+/* =========================================================
+   Footer
+   ========================================================= */
+footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  text-align: center;
+  padding: 20px;
+}
 
-/* ========== Responsive ========== */
+/* =========================================================
+   Responsive
+   ========================================================= */
 @media (max-width: 768px) {
   header h1 { font-size: 2em; }
   .content  { padding: 20px; }
@@ -100,17 +218,17 @@ footer { background:#333; color:#fff; text-align:center; padding:20px; }
 }
 
 /* ===================================================================== */
-/* ========== Collapsible Cards (Experience + Education + Projects) ==== */
+/* Collapsible Cards (Experience + Education + Projects) */
 /* ===================================================================== */
 
 details.experience-item,
 details.education-item,
 details.project-item {
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid var(--card-border);
   border-radius: 10px;
   margin-bottom: 20px;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
   overflow: hidden;
 }
 
@@ -124,8 +242,8 @@ details.project-item summary {
   column-gap: 12px;
   align-items: center;
   padding: 16px 20px;
-  background-color: #f3f4fb;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  background-color: var(--summary-bg);
+  border-bottom: 1px solid var(--card-border);
   transition: background-color 0.2s ease;
   list-style: none;
   min-width: 0; /* fix for long lines */
@@ -133,11 +251,11 @@ details.project-item summary {
 
 details.experience-item summary:hover,
 details.education-item summary:hover,
-details.project-item summary:hover { background-color: #eef2ff; }
+details.project-item summary:hover { background-color: var(--summary-hover); }
 
 details[open].experience-item summary,
 details[open].education-item summary,
-details[open].project-item summary { background-color: #eef2ff; }
+details[open].project-item summary { background-color: var(--summary-hover); }
 
 details.experience-item summary::-webkit-details-marker,
 details.education-item summary::-webkit-details-marker,
@@ -152,7 +270,7 @@ details.education-item summary::before,
 details.project-item summary::before {
   content: "▸";
   font-size: 1.2em;
-  color: #667eea;
+  color: var(--accent);
   justify-self: center;
   align-self: center;
   transition: transform 0.25s ease, color 0.25s ease, opacity 0.25s ease;
@@ -162,7 +280,7 @@ details[open].experience-item summary::before,
 details[open].education-item summary::before,
 details[open].project-item summary::before {
   transform: rotate(90deg);
-  color: #4b5fd9;
+  color: var(--accent-strong);
   opacity: 1;
 }
 
@@ -183,7 +301,7 @@ details.education-item summary h3,
 details.project-item summary h3 {
   font-size: 1.45em;
   font-weight: 800;
-  color: #1d2430;
+  color: var(--text);
   margin-bottom: 6px;
 }
 details.experience-item summary h4,
@@ -191,7 +309,7 @@ details.education-item summary h4,
 details.project-item summary h4 {
   font-size: 1.05em;
   font-weight: 600;
-  color: #5f6673;
+  color: var(--muted);
   line-height: 1.3;
   margin-bottom: 6px;
   text-align: left;
@@ -201,7 +319,7 @@ details.project-item summary h4 {
 details.experience-item summary .date,
 details.education-item summary .date,
 details.project-item summary .date {
-  color: #667eea;
+  color: var(--accent);
   font-style: italic;
   font-size: 0.95em;
 }
@@ -216,7 +334,7 @@ details.experience-item > :not(summary),
 details.education-item  > :not(summary),
 details.project-item   > :not(summary) {
   padding: 10px var(--card-pad-right) 15px var(--card-pad-left);
-  background: #fff;
+  background: var(--card-bg);
 }
 
 /* Bullet lists alignment */
@@ -226,12 +344,13 @@ details.project-item    > ul {
   margin: 10px var(--card-pad-right) 10px var(--card-pad-left);
   padding-left: 20px;
   list-style-position: outside;
+  color: var(--text);
 }
 
 /* Rotation subheads */
 details.experience-item h5 {
   font-size: 1.05em;
-  color: #444;
+  color: var(--muted);
   text-align: center;
   margin: 15px auto 8px;
   font-weight: 600;
@@ -246,7 +365,7 @@ details.experience-item h5 {
   font-size: 0.8em;
   font-weight: 600;
   color: #fff;
-  background-color: #667eea;
+  background-color: var(--accent);
   border-radius: 12px;
   vertical-align: middle;
 }
@@ -258,7 +377,7 @@ details.education-item[open]  > :not(summary),
 details.project-item[open]    > :not(summary) { animation: fadeIn .25s ease-in-out; }
 
 /* ===================================================================== */
-/* ========== Skills Header & Tags ==================================== */
+/* Skills Header & Tags */
 /* ===================================================================== */
 
 details.experience-item > .skills-header,
@@ -266,7 +385,7 @@ details.education-item  > .skills-header,
 details.project-item    > .skills-header {
   display: block;
   text-align: center;
-  color: #4b5fd9;
+  color: var(--accent-strong);
   font-weight: 800;
   font-size: 1.1em;
   margin: 16px var(--card-pad-right) 10px var(--card-pad-left);
@@ -282,7 +401,8 @@ details.education-item  ul + .skills-header::before,
 details.project-item    ul + .skills-header::before {
   content: "";
   display: block;
-  background: rgba(0,0,0,0.08);
+  background: var(--divider);
+  height: 1px;
   margin: 0 var(--card-pad-right) 12px var(--card-pad-left);
   border-radius: 1px;
 }
@@ -296,8 +416,8 @@ details.project-item    > .skills {
   display: flex;
   flex-wrap: wrap;
   gap: 10px 14px;
-  background: #f6f7ff;
-  border: 1px solid rgba(75,95,217,0.18);
+  background: var(--chip-panel-bg);
+  border: 1px solid var(--chip-panel-border);
   border-radius: 12px;
   justify-content: center;
 }
@@ -312,8 +432,8 @@ details.project-item    .skill-tag {
   padding: 8px 16px;
   font-size: 0.9em;
   border-radius: 9999px;
-  color: #fff;
-  background: #667eea;
+  color: var(--chip-text);
+  background: var(--chip-bg);
   text-align: center;
   white-space: nowrap;
   transition: background .15s ease, transform .04s ease;
@@ -336,13 +456,11 @@ details.project-item    .skill-tag:hover { background: #5a6eea; }
 }
 .print-btn:hover { box-shadow: 0 4px 10px rgba(0,0,0,.2); }
 
-/* ===================== PRINT (US Letter, compact, color-accurate) ===================== */
+/* =========================================================
+   PRINT (US Letter, compact, color-accurate)
+   ========================================================= */
 @media print {
-  /* Page size & margins (US Letter 8.5x11in) */
-  @page {
-    size: 8.5in 11in;
-    margin: 0.5in;  /* roughly 12.7mm margins for balance */
-  }
+  @page { size: 8.5in 11in; margin: 0.5in; }
 
   html, body, header, .container, .content, section, details, summary {
     -webkit-print-color-adjust: exact !important;
@@ -350,17 +468,14 @@ details.project-item    .skill-tag:hover { background: #5a6eea; }
     color-adjust: exact !important;
   }
 
-  /* --- General compact layout --- */
-  body { background: #fff !important; }
-  .container, .content, section {
-    background: #fff !important;
-    box-shadow: none !important;
-  }
+  /* General compaction */
+  body { background: #fff !important; color: #000 !important; }
+  .container, .content, section { background: #fff !important; box-shadow: none !important; }
   .content { padding: 0 !important; }
   section { margin-bottom: 16px !important; }
   h2 { margin: 0 0 8px !important; padding-bottom: 6px !important; border-bottom-width: 2px !important; }
 
-  /* --- Header (horizontal + plain URLs for print) --- */
+  /* Header (horizontal + plain URLs) */
   header {
     background: linear-gradient(135deg,#667eea 0%,#764ba2 100%) !important;
     color: #fff !important;
@@ -375,16 +490,11 @@ details.project-item    .skill-tag:hover { background: #5a6eea; }
     flex-wrap: nowrap !important;
     text-align: left !important;
   }
-  .profile-photo {
-    width: 70px !important;
-    height: 70px !important;
-    border-width: 2px !important;
-    box-shadow: none !important;
-  }
+  .profile-photo { width: 70px !important; height: 70px !important; border-width: 2px !important; box-shadow: none !important; }
   header h1 { font-size: 20pt !important; margin: 0 0 2px !important; }
   header p  { font-size: 11pt !important; margin: 0 0 4px !important; }
 
-  /* Contact URLs instead of buttons */
+  /* Contact URLs instead of pills */
   .contact-info a {
     background: none !important;
     color: #fff !important;
@@ -398,11 +508,8 @@ details.project-item    .skill-tag:hover { background: #5a6eea; }
   .contact-info a[href*="github"]::after   { content: " — " attr(href); }
   .contact-info a[href^="mailto"]::after   { content: " — " attr(href); }
 
-  /* --- Card handling (split allowed) --- */
-  details,
-  .experience-item,
-  .education-item,
-  .project-item {
+  /* Cards split allowed, keep header with content */
+  details, .experience-item, .education-item, .project-item {
     break-inside: auto !important;
     page-break-inside: auto !important;
     border-color: #ccc !important;
@@ -414,11 +521,9 @@ details.project-item    .skill-tag:hover { background: #5a6eea; }
     background: #f3f4fb !important;
     padding: 10px 12px !important;
   }
-  details > :not(summary) {
-    padding: 8px 12px 10px 18px !important;
-  }
+  details > :not(summary) { padding: 8px 12px 10px 18px !important; }
 
-  /* --- Compact text, headers, and chips --- */
+  /* Compact text & chips */
   p, li { font-size: 10pt !important; line-height: 1.35 !important; }
   details summary h3 { font-size: 12.5pt !important; }
   details summary h4 { font-size: 10.5pt !important; }
@@ -436,50 +541,12 @@ details.project-item    .skill-tag:hover { background: #5a6eea; }
     padding: 4px 8px !important;
   }
 
-  /* Prevent widows/orphans */
-  p, li, h3, h4 { orphans: 2; widows: 2; }
-
-  header {
-    padding: 14px 16px !important;
-    text-align: left !important;
-    background: linear-gradient(135deg,#667eea 0%,#764ba2 100%) !important;
-    color: #fff !important;
-  }
-  .header-content {
-    max-width: 900px !important;
-    margin: 0 auto !important;
-    display: flex !important;
-    flex-direction: row !important;     /* force horizontal */
-    align-items: center !important;
-    justify-content: flex-start !important;
-    gap: 12px !important;
-    flex-wrap: nowrap !important;
-    text-align: left !important;
-  }
-  .profile-photo {
-    width: 70px !important; height: 70px !important;
-    border-width: 2px !important; box-shadow: none !important;
-  }
-  .header-text h1 { font-size: 20pt !important; margin: 0 0 2px !important; }
-  .header-text p  { font-size: 11pt !important; margin: 0 0 4px !important; }
-
-  /* Show plain URLs instead of pills */
-  .contact-info { display: block !important; gap: 0 !important; margin-top: 4px !important; }
-  .contact-info a {
-    background: none !important; border: 0 !important; padding: 0 !important;
-    color: #fff !important; text-decoration: none !important;
-    display: block !important; font-size: 9.5pt !important; line-height: 1.35 !important;
-  }
-  .contact-info a[href*="linkedin"]::after { content: " — " attr(href); }
-  .contact-info a[href*="github"]::after   { content: " — " attr(href); }
-  .contact-info a[href^="mailto"]::after   { content: " — " attr(href); }
-
-  /* Toolbar/button hidden in print */
+  /* Hide screen-only UI */
   .resume-toolbar, .print-btn { display: none !important; }
 }
 
 /* ===================================================================== */
-/* ========== Mobile adjustments ====================================== */
+/* Mobile adjustments */
 /* ===================================================================== */
 @media (max-width: 640px) {
   :root { --card-pad-left: 32px; --card-pad-right: 16px; }
