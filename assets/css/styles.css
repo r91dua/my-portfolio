@@ -256,70 +256,145 @@ details.education-item  .skill-tag:active { transform: translateY(.5px); }
 }
 
 /* ========================================================= */
-/* ========== Projects Section ============================= */
+/* ========== Collapsible Project Cards ==================== */
 /* ========================================================= */
 
-#projects {
-  margin-top: 50px;
-}
-
-#projects h2 {
-  color: #667eea;
-  font-size: 1.8em;
-  margin-bottom: 25px;
-  border-bottom: 3px solid #667eea;
-  padding-bottom: 10px;
-}
-
-.project-item {
-  background: #fff;
+/* Shared base for collapsible cards */
+details.project-item {
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
-  padding: 24px 30px;
-  transition: all 0.3s ease;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
-.project-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+/* Header section */
+details.project-item summary {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  column-gap: 12px;
+  align-items: center;
+  padding: 16px 20px;
+  list-style: none;
+  background-color: #eaebf2;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: background-color 0.2s ease;
 }
 
-.project-item h3 {
-  font-size: 1.3em;
+details.project-item summary:hover {
+  background-color: #eef2ff;
+}
+details[open].project-item summary {
+  background-color: #eef2ff;
+}
+
+/* Hide the native arrow */
+details.project-item summary::-webkit-details-marker {
+  display: none;
+}
+details.project-item summary::marker {
+  content: "";
+}
+
+/* Custom arrow */
+details.project-item summary::before {
+  content: "▸";
+  font-size: 1.2em;
+  color: #667eea;
+  justify-self: center;
+  align-self: center;
+  transition: transform 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+  opacity: 0.9;
+}
+details[open].project-item summary::before {
+  transform: rotate(90deg);
+  color: #4b5fd9;
+  opacity: 1;
+}
+
+/* Title formatting */
+details.project-item h3 {
+  font-size: 1.2em;
   color: #333;
-  margin-bottom: 10px;
-  font-weight: 600;
+  margin-bottom: 4px;
 }
-
-.project-item p {
-  color: #444;
+details.project-item h4 {
   font-size: 1em;
-  line-height: 1.6;
-  margin-bottom: 15px;
+  font-weight: 500;
+  color: #555;
+  margin: 0;
 }
 
-.project-tags {
+/* Card body */
+details.project-item > :not(summary) {
+  padding: 16px 40px 20px 45px;
+  background: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+/* Paragraph spacing */
+details.project-item p {
+  margin-bottom: 15px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Skills header inside card */
+details.project-item .skills-header {
+  text-align: center;
+  color: #4b5fd9;
+  font-weight: 700;
+  font-size: 1.05em;
+  margin: 18px 0 10px 0;
+  letter-spacing: 0.3px;
+  position: relative;
+}
+details.project-item .skills-header::before {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 80%;
+  margin: 0 auto 10px auto;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 1px;
+}
+
+/* Skills list (tags) */
+details.project-item .skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  justify-content: center;
+  gap: 10px 12px;
+  background: #f6f7ff;
+  border: 1px solid rgba(75, 95, 217, 0.18);
+  border-radius: 12px;
+  padding: 12px 18px;
 }
 
-.project-tags .tag {
+details.project-item .skill-tag {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #667eea;
-  color: #fff;
   padding: 8px 14px;
-  border-radius: 25px;
-  font-size: 0.85em;
+  font-size: 0.88em;
+  color: #fff;
+  background: #667eea;
+  border-radius: 9999px;
   font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
   transition: background 0.25s ease;
 }
-
-.project-tags .tag:hover {
+details.project-item .skill-tag:hover {
   background: #4b5fd9;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
