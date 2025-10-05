@@ -220,7 +220,7 @@ details.education-item  ul + .skills-header::before {
 /* Skills panel (chips container) — aligned to gutters */
 details.experience-item > .skills,
 details.education-item  > .skills {
-  margin: 6px var(--card-pad-right) 18px var(--card-pad-left);
+  margin: 6px var(--card-pad-right) 6px var(--card-pad-left);
   padding: 14px 18px;
   display: flex;
   flex-wrap: wrap;
