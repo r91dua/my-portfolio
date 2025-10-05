@@ -323,6 +323,84 @@ details.experience-item .skill-tag:hover,
 details.education-item  .skill-tag:hover,
 details.project-item    .skill-tag:hover { background: #5a6eea; }
 
+/* ===== Print button styling (screen only) ===== */
+.print-btn {
+  margin-top: 14px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 0;
+  font-weight: 600;
+  cursor: pointer;
+  background: #fff;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+}
+.print-btn:hover { box-shadow: 0 4px 10px rgba(0,0,0,.2); }
+
+/* ===== Print styles ===== */
+@media print {
+  /* Page size & margins (adjust to 'letter' if you prefer) */
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  /* Remove backgrounds that can waste ink; keep brand color where needed */
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #fff !important;
+  }
+
+  header {
+    /* Flatten gradient to a soft color for print; or keep it if you prefer */
+    background: #667eea !important;
+    color: #fff !important;
+    box-shadow: none !important;
+  }
+
+  .container, .content, section {
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide interactive-only UI */
+  .print-btn,
+  .contact-info a[target="_blank"]::after { display: none !important; }
+
+  /* Ensure collapsible cards don’t split awkwardly across pages */
+  details,
+  .experience-item,
+  .education-item,
+  .project-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Tighter spacing for print */
+  .content { padding: 0 !important; }
+  section { margin-bottom: 18px !important; }
+  h2 { margin: 0 0 10px !important; padding-bottom: 6px !important; border-bottom-width: 2px !important; }
+
+  /* Lists & tags */
+  ul { margin: 6px 0 8px 20px !important; }
+  .skills, .project-tags {
+    border: 1px solid #ccc !important;
+    background: #fafafa !important;
+  }
+
+  /* Avoid widows/orphans if browser supports it */
+  p, li, h3, h4 { orphans: 2; widows: 2; }
+
+  /* Remove page scroll-only visuals */
+  .container { box-shadow: none !important; }
+}
+
+/* When printing via script, you can tweak specifics */
+body.printing header {
+  background: #667eea !important;
+}
+
 /* ===================================================================== */
 /* ========== Mobile adjustments ====================================== */
 /* ===================================================================== */
