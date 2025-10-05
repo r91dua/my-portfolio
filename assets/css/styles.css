@@ -1,103 +1,139 @@
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;color:#333;background:#f4f4f4}
-.container{max-width:1000px;margin:0 auto;background:#fff;box-shadow:0 0 20px rgba(0,0,0,.1)}
-header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:60px 40px;text-align:center}
-header h1{font-size:2.5em;margin-bottom:10px}
-header p{font-size:1.2em;margin-bottom:20px}
-.contact-info{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
-.contact-info a{color:#fff;text-decoration:none;padding:8px 15px;background:rgba(255,255,255,.2);border-radius:5px;transition:.3s}
-.contact-info a:hover{background:rgba(255,255,255,.3)}
-.content{padding:40px}
-section{margin-bottom:40px}
-h2{color:#667eea;font-size:1.8em;margin-bottom:20px;padding-bottom:10px;border-bottom:3px solid #667eea}
-.experience-item,.education-item,.project-item{margin-bottom:25px}
-.experience-item h3,.education-item h3,.project-item h3{color:#333;font-size:1.3em;margin-bottom:5px}
-.date{color:#666;font-style:italic;margin-bottom:10px}
-.skills{display:flex;flex-wrap:wrap;gap:10px}
-.skill-tag{background:#667eea;color:#fff;padding:8px 15px;border-radius:20px;font-size:.9em}
-ul{margin-left:20px;margin-top:10px}
-footer{background:#333;color:#fff;text-align:center;padding:20px}
-@media(max-width:768px){
-  header h1{font-size:2em}
-  .content{padding:20px}
-  .contact-info{flex-direction:column;align-items:center}
+/* ========== Base Reset & Layout ========== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #f4f4f4;
 }
-/* Collapsible experience styling */
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0,0,0,.1);
+}
+
+/* ========== Header ========== */
+header {
+  background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  color: #fff;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+header h1 { font-size: 2.5em; margin-bottom: 10px; }
+header p  { font-size: 1.2em; margin-bottom: 20px; }
+
+.contact-info {
+  display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+}
+.contact-info a {
+  color: #fff; text-decoration: none; padding: 8px 15px;
+  background: rgba(255,255,255,.2); border-radius: 5px; transition: .3s;
+}
+.contact-info a:hover { background: rgba(255,255,255,.3); }
+
+/* ========== Content ========== */
+.content { padding: 40px; }
+section  { margin-bottom: 40px; }
+
+h2 {
+  color: #667eea; font-size: 1.8em; margin-bottom: 20px;
+  padding-bottom: 10px; border-bottom: 3px solid #667eea;
+}
+
+.experience-item,
+.education-item,
+.project-item { margin-bottom: 25px; }
+
+.experience-item h3,
+.education-item h3,
+.project-item h3 { color: #333; font-size: 1.3em; margin-bottom: 5px; }
+
+.date { color: #666; font-style: italic; margin-bottom: 10px; }
+
+.skills { display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-tag { background:#667eea; color:#fff; padding:8px 15px; border-radius:20px; font-size:.9em; }
+
+/* default list spacing (non-collapsible areas) */
+ul { margin-left: 20px; margin-top: 10px; }
+
+/* ========== Footer ========== */
+footer { background:#333; color:#fff; text-align:center; padding:20px; }
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  header h1 { font-size: 2em; }
+  .content  { padding: 20px; }
+  .contact-info { flex-direction: column; align-items: center; }
+}
+
+/* ========== Collapsible Experience (details/summary) ========== */
+/* Card container */
 details.experience-item {
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0,0,0,0.1);
   border-radius: 10px;
   margin-bottom: 20px;
   background: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   overflow: hidden;
 }
 
+/* Summary header as a 2-col grid: [arrow][stacked headings] */
 details.experience-item summary {
   cursor: pointer;
-  padding: 16px 20px 16px 45px; /* add left padding for the arrow */
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  column-gap: 12px;
+  align-items: center;          /* vertically centers the arrow */
+  padding: 16px 20px;           /* even padding; no extra left needed */
   list-style: none;
-  position: relative;
 }
 
-details.experience-item summary::-webkit-details-marker {
-  display: none;
+details.experience-item summary::-webkit-details-marker { display: none; }
+
+/* Place all header text in column 2 and keep your stacked look */
+details.experience-item summary > * {
+  grid-column: 2;
+  margin: 0;
 }
 
-/* ▸ Arrow icon — now on the LEFT */
+/* Keep your original typography within the summary */
+details.experience-item h3 { font-size: 1.3em; color: #333; margin-bottom: 4px; }
+details.experience-item h4 { font-size: 1.05em; font-weight: 500; color: #555; margin-bottom: 3px; }
+details.experience-item .date { color: #667eea; font-style: italic; font-size: 0.95em; }
+
+/* Left-centered arrow indicator in column 1 */
 details.experience-item summary::before {
   content: "▸";
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
   font-size: 1.2em;
   color: #667eea;
-  transition: transform 0.25s ease, color 0.25s ease;
-  opacity: 0.8;
+  justify-self: center;  /* center horizontally in the arrow column */
+  align-self: center;    /* center vertically */
+  transition: transform 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+  opacity: 0.85;
 }
 
-/* Rotate the arrow when expanded */
+/* Rotate/tint when open */
 details[open].experience-item summary::before {
-  transform: translateY(-50%) rotate(90deg);
-  opacity: 1;
+  transform: rotate(90deg);
   color: #4b5fd9;
+  opacity: 1;
 }
 
-details.experience-item h3 {
-  font-size: 1.3em;
-  color: #333;
-  margin-bottom: 4px;
-}
-
-details.experience-item h4 {
-  font-size: 1.05em;
-  font-weight: 500;
-  color: #555;
-  margin-bottom: 3px;
-}
-
-details.experience-item .date {
-  color: #667eea;
-  font-style: italic;
-  font-size: 0.95em;
-}
-
+/* Body list inside details */
 details.experience-item ul {
-  margin: 10px 20px 20px 40px;
+  margin: 10px 20px 20px 40px;  /* a bit more left for nice rhythm */
 }
 
+/* Simple fade-in for content on open */
 details.experience-item[open] ul {
   animation: fadeIn 0.3s ease-in-out;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
