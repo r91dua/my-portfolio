@@ -44,19 +44,6 @@ h2 {
   padding-bottom: 10px; border-bottom: 3px solid #667eea;
 }
 
-.experience-item,
-.education-item,
-.project-item { margin-bottom: 25px; }
-
-.experience-item h3,
-.education-item h3,
-.project-item h3 { color: #333; font-size: 1.3em; margin-bottom: 5px; }
-
-.date { color: #666; font-style: italic; margin-bottom: 10px; }
-
-.skills { display: flex; flex-wrap: wrap; gap: 10px; }
-.skill-tag { background:#667eea; color:#fff; padding:8px 15px; border-radius:20px; font-size:.9em; }
-
 ul { margin-left: 20px; margin-top: 10px; }
 
 /* ========== Footer ========== */
@@ -70,9 +57,8 @@ footer { background:#333; color:#fff; text-align:center; padding:20px; }
 }
 
 /* ===================================================================== */
-/* ========== Collapsible Card (Experience + Education) ================ */
+/* ========== Collapsible Card Styles (Experience + Education) ========= */
 /* ===================================================================== */
-
 details.experience-item,
 details.education-item {
   border: 1px solid rgba(0,0,0,0.1);
@@ -91,29 +77,15 @@ details.education-item summary {
   column-gap: 12px;
   align-items: center;
   padding: 16px 20px;
+  list-style: none;
   background-color: #eaebf2;
   border-bottom: 1px solid rgba(0,0,0,0.06);
   transition: background-color 0.2s ease;
-  list-style: none;
 }
-
 details.experience-item summary:hover,
 details.education-item summary:hover { background-color: #eef2ff; }
-
 details[open].experience-item summary,
 details[open].education-item summary { background-color: #eef2ff; }
-
-details.experience-item summary::-webkit-details-marker,
-details.education-item summary::-webkit-details-marker { display: none; }
-
-details.experience-item summary::marker,
-details.education-item summary::marker { content: ""; }
-
-details.experience-item summary > *,
-details.education-item summary > * {
-  grid-column: 2;
-  margin: 0;
-}
 
 details.experience-item summary::before,
 details.education-item summary::before {
@@ -122,16 +94,42 @@ details.education-item summary::before {
   color: #667eea;
   justify-self: center;
   align-self: center;
-  transition: transform 0.25s ease, color 0.25s ease;
+  transition: transform 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+  opacity: 0.9;
 }
-
 details[open].experience-item summary::before,
 details[open].education-item summary::before {
   transform: rotate(90deg);
   color: #4b5fd9;
+  opacity: 1;
 }
 
-/* Body content */
+details.experience-item summary > *,
+details.education-item summary > * {
+  grid-column: 2;
+  margin: 0;
+}
+
+details.experience-item h3,
+details.education-item h3 {
+  font-size: 1.3em;
+  color: #333;
+  margin-bottom: 4px;
+}
+details.experience-item h4,
+details.education-item h4 {
+  font-size: 1.05em;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 3px;
+}
+details.experience-item .date,
+details.education-item .date {
+  color: #667eea;
+  font-style: italic;
+  font-size: 0.95em;
+}
+
 details.experience-item > :not(summary),
 details.education-item  > :not(summary) {
   padding: 12px 24px 18px 45px;
@@ -172,62 +170,79 @@ details.education-item[open]  > :not(summary) {
 }
 
 /* ===================================================================== */
-/* ========== Skills Header + Tags Styling ============================= */
+/* ========== SKILLS HEADER & TAG STYLING (UPDATED FINAL) ============== */
 /* ===================================================================== */
-
-/* Skills header — stays inside card body with clean white background */
-.skills-header {
+section#experience details.experience-item > .skills-header,
+section#education  details.education-item  > .skills-header {
   display: block;
-  margin: 20px 0 10px;
-  padding-left: 45px;
+  margin: 18px 0 8px !important;
+  padding: 0 22px 0 45px !important;
   color: #4b5fd9;
   font-weight: 700;
-  font-size: 1.05em;
+  font-size: 1.06em;
   line-height: 1.25;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
-/* Divider line between content and skills header */
-.skills-header::before {
+section#experience details.experience-item ul + .skills-header::before,
+section#education  details.education-item  ul + .skills-header::before {
   content: "";
   display: block;
   height: 1px;
   background: rgba(0,0,0,0.08);
-  margin: 0 22px 12px 0;
+  margin: 0 22px 12px 45px;
   border-radius: 1px;
 }
 
-/* Skills container — subtle background, rounded corners */
-details.experience-item > .skills,
-details.education-item > .skills {
-  margin: 0 22px 14px 45px;
-  padding: 14px 18px;
+section#experience details.experience-item > .skills,
+section#education  details.education-item  > .skills {
+  position: relative;
+  margin: 6px 22px 14px 45px !important;
+  padding: 14px 18px !important;
   display: flex;
   flex-wrap: wrap;
   gap: 10px 12px;
   background: #f6f7ff;
   border: 1px solid rgba(75,95,217,0.18);
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
-/* Skill tags */
-.skill-tag {
+section#experience details.experience-item .skill-tag,
+section#education  details.education-item  .skill-tag {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 7px 14px;
-  font-size: 0.9em;
+  padding: 8px 16px;
+  font-size: .9em;
   border-radius: 9999px;
   color: #fff;
   background: #667eea;
   text-align: center;
+  white-space: nowrap;
   transition: background .15s ease, transform .04s ease;
 }
+section#experience details.experience-item .skill-tag:hover,
+section#education  details.education-item  .skill-tag:hover { background: #5a6eea; }
+section#experience details.experience-item .skill-tag:active,
+section#education  details.education-item  .skill-tag:active { transform: translateY(.5px); }
 
-.skill-tag:hover { background: #5a6eea; }
-.skill-tag:active { transform: translateY(0.5px); }
+@media (max-width: 640px) {
+  section#experience details.experience-item > .skills-header,
+  section#education  details.education-item  > .skills-header {
+    padding-left: 32px !important;
+  }
+  section#experience details.experience-item > .skills,
+  section#education  details.education-item  > .skills {
+    margin: 6px 16px 12px 32px !important;
+    gap: 8px 10px;
+    padding: 12px;
+  }
+}
 
 /* ===================================================================== */
-/* ========== Animation ================================================ */
+/* ========== Animation Keyframes ====================================== */
 /* ===================================================================== */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-4px); }
