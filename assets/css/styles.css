@@ -1,12 +1,6 @@
 /* ========== Base Reset & Layout ========== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-:root {
-  /* unified inner gutters for all cards */
-  --card-pad-left: 45px;
-  --card-pad-right: 24px;
-}
-
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
@@ -61,11 +55,12 @@ footer { background:#333; color:#fff; text-align:center; padding:20px; }
 }
 
 /* ===================================================================== */
-/* ========== Collapsible Cards (Experience + Education) =============== */
+/* ========== Collapsible Cards (Experience + Education + Projects) ==== */
 /* ===================================================================== */
 
 details.experience-item,
-details.education-item {
+details.education-item,
+details.project-item {
   border: 1px solid rgba(0,0,0,0.1);
   border-radius: 10px;
   margin-bottom: 20px;
@@ -76,7 +71,8 @@ details.education-item {
 
 /* Summary header */
 details.experience-item summary,
-details.education-item summary {
+details.education-item summary,
+details.project-item summary {
   cursor: pointer;
   display: grid;
   grid-template-columns: 24px 1fr; /* arrow + text stack */
@@ -87,19 +83,28 @@ details.education-item summary {
   border-bottom: 1px solid rgba(0,0,0,0.06);
   transition: background-color 0.2s ease;
   list-style: none;
+  min-width: 0; /* fix for long lines */
 }
+
 details.experience-item summary:hover,
-details.education-item summary:hover { background-color: #eef2ff; }
+details.education-item summary:hover,
+details.project-item summary:hover { background-color: #eef2ff; }
+
 details[open].experience-item summary,
-details[open].education-item summary { background-color: #eef2ff; }
+details[open].education-item summary,
+details[open].project-item summary { background-color: #eef2ff; }
 
 details.experience-item summary::-webkit-details-marker,
-details.education-item summary::-webkit-details-marker { display: none; }
+details.education-item summary::-webkit-details-marker,
+details.project-item summary::-webkit-details-marker { display: none; }
 details.experience-item summary::marker,
-details.education-item summary::marker { content: ""; }
+details.education-item summary::marker,
+details.project-item summary::marker { content: ""; }
 
+/* Custom arrow */
 details.experience-item summary::before,
-details.education-item summary::before {
+details.education-item summary::before,
+details.project-item summary::before {
   content: "▸";
   font-size: 1.2em;
   color: #667eea;
@@ -109,27 +114,36 @@ details.education-item summary::before {
   opacity: 0.9;
 }
 details[open].experience-item summary::before,
-details[open].education-item summary::before {
+details[open].education-item summary::before,
+details[open].project-item summary::before {
   transform: rotate(90deg);
   color: #4b5fd9;
   opacity: 1;
 }
 
-/* Place h3/h4/date in the text column */
+/* Text stack inside summary */
 details.experience-item summary > *,
-details.education-item summary > * { grid-column: 2; margin: 0; }
+details.education-item summary > *,
+details.project-item summary > * {
+  grid-column: 2;
+  margin: 0;
+  min-width: 0;
+  word-break: normal;
+  white-space: normal;
+}
 
-/* Summary typography (role, company, date) */
+/* Summary text styles */
 details.experience-item summary h3,
-details.education-item  summary h3 {
+details.education-item summary h3,
+details.project-item summary h3 {
   font-size: 1.45em;
   font-weight: 800;
   color: #1d2430;
   margin-bottom: 6px;
 }
 details.experience-item summary h4,
-details.education-item  summary h4 {
-  /* Company line — scoped so it never conflicts with .skills-header */
+details.education-item summary h4,
+details.project-item summary h4 {
   font-size: 1.05em;
   font-weight: 600;
   color: #5f6673;
@@ -137,30 +151,39 @@ details.education-item  summary h4 {
   margin-bottom: 6px;
   text-align: left;
 }
+
+/* Date */
 details.experience-item summary .date,
-details.education-item  summary .date {
+details.education-item summary .date,
+details.project-item summary .date {
   color: #667eea;
   font-style: italic;
   font-size: 0.95em;
 }
 
-/* Card body gutters */
-details.experience-item > :not(summary),
-details.education-item  > :not(summary) {
-  padding: 10px var(--card-pad-right) 15px var(--card-pad-left);
-  background: #fff;
-  border-top: 1px solid rgba(0,0,0,0.05);
+/* Body padding */
+:root {
+  --card-pad-left: 28px;
+  --card-pad-right: 28px;
 }
 
-/* Bullet lists — aligned */
+details.experience-item > :not(summary),
+details.education-item  > :not(summary),
+details.project-item   > :not(summary) {
+  padding: 10px var(--card-pad-right) 15px var(--card-pad-left);
+  background: #fff;
+}
+
+/* Bullet lists alignment */
 details.experience-item > ul,
-details.education-item  > ul {
+details.education-item  > ul,
+details.project-item    > ul {
   margin: 10px var(--card-pad-right) 10px var(--card-pad-left);
   padding-left: 20px;
   list-style-position: outside;
 }
 
-/* Rotation subheads (inside body) */
+/* Rotation subheads */
 details.experience-item h5 {
   font-size: 1.05em;
   color: #444;
@@ -170,7 +193,7 @@ details.experience-item h5 {
   width: 100%;
 }
 
-/* Little tag pill (optional) */
+/* Tag pill */
 .tag {
   display: inline-block;
   margin-left: 8px;
@@ -186,15 +209,16 @@ details.experience-item h5 {
 /* Open animation */
 @keyframes fadeIn { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:translateY(0)} }
 details.experience-item[open] > :not(summary),
-details.education-item[open]  > :not(summary) { animation: fadeIn .25s ease-in-out; }
+details.education-item[open]  > :not(summary),
+details.project-item[open]    > :not(summary) { animation: fadeIn .25s ease-in-out; }
 
 /* ===================================================================== */
-/* ========== Skills Header & Panel (inside cards) ===================== */
+/* ========== Skills Header & Tags ==================================== */
 /* ===================================================================== */
 
-/* Centered Skills header — does NOT affect company <h4> in summary */
 details.experience-item > .skills-header,
-details.education-item  > .skills-header {
+details.education-item  > .skills-header,
+details.project-item    > .skills-header {
   display: block;
   text-align: center;
   color: #4b5fd9;
@@ -207,9 +231,10 @@ details.education-item  > .skills-header {
   box-shadow: none !important;
 }
 
-/* Optional thin divider above header (aligned with body gutters) */
+/* Divider above skills */
 details.experience-item ul + .skills-header::before,
-details.education-item  ul + .skills-header::before {
+details.education-item  ul + .skills-header::before,
+details.project-item    ul + .skills-header::before {
   content: "";
   display: block;
   height: 1px;
@@ -218,9 +243,10 @@ details.education-item  ul + .skills-header::before {
   border-radius: 1px;
 }
 
-/* Skills panel (chips container) — aligned to gutters */
+/* Skills container */
 details.experience-item > .skills,
-details.education-item  > .skills {
+details.education-item  > .skills,
+details.project-item    > .skills {
   margin: 6px var(--card-pad-right) 22px var(--card-pad-left);
   padding: 14px 18px;
   display: flex;
@@ -229,11 +255,13 @@ details.education-item  > .skills {
   background: #f6f7ff;
   border: 1px solid rgba(75,95,217,0.18);
   border-radius: 12px;
+  justify-content: center;
 }
 
 /* Skill chips */
 details.experience-item .skill-tag,
-details.education-item  .skill-tag {
+details.education-item  .skill-tag,
+details.project-item    .skill-tag {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -247,148 +275,11 @@ details.education-item  .skill-tag {
   transition: background .15s ease, transform .04s ease;
 }
 details.experience-item .skill-tag:hover,
-details.education-item  .skill-tag:hover { background: #5a6eea; }
-details.experience-item .skill-tag:active,
-details.education-item  .skill-tag:active { transform: translateY(.5px); }
+details.education-item  .skill-tag:hover,
+details.project-item    .skill-tag:hover { background: #5a6eea; }
 
 /* ===================================================================== */
-/* ========== Collapsible Project Cards (MATCHED STYLE) ================ */
-/* ===================================================================== */
-
-#projects { margin-top: 50px; }
-
-#projects h2 {
-  color: #667eea;
-  font-size: 1.8em;
-  margin-bottom: 25px;
-  border-bottom: 3px solid #667eea;
-  padding-bottom: 10px;
-}
-
-/* Only the collapsible version (details) — avoids conflicts */
-details.project-item {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  margin-bottom: 20px;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-}
-
-/* Project summary header (same as experience/education) */
-details.project-item summary {
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: 24px 1fr;
-  column-gap: 12px;
-  align-items: center;
-  padding: 16px 20px;
-  list-style: none;
-  background-color: #f3f4fb;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  transition: background-color 0.2s ease;
-}
-details.project-item summary:hover { background-color: #eef2ff; }
-details[open].project-item summary { background-color: #eef2ff; }
-
-details.project-item summary::-webkit-details-marker { display: none; }
-details.project-item summary::marker { content: ""; }
-
-details.project-item summary::before {
-  content: "▸";
-  font-size: 1.2em;
-  color: #667eea;
-  justify-self: center;
-  align-self: center;
-  transition: transform 0.25s ease, color 0.25s ease, opacity 0.25s ease;
-  opacity: 0.9;
-}
-details[open].project-item summary::before {
-  transform: rotate(90deg);
-  color: #4b5fd9;
-  opacity: 1;
-}
-
-/* Project header typography */
-details.project-item summary > * { grid-column: 2; margin: 0; }
-
-details.project-item h3 {
-  font-size: 1.2em;
-  color: #333;
-  margin-bottom: 4px;
-  font-weight: 700;
-}
-details.project-item h4 {
-  font-size: 1em;
-  font-weight: 500;
-  color: #555;
-  margin: 0;
-}
-
-/* Project body */
-details.project-item > :not(summary) {
-  padding: 16px var(--card-pad-right) 20px var(--card-pad-left);
-  background: #fff;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  animation: fadeIn 0.25s ease-in-out;
-}
-
-details.project-item p {
-  margin-bottom: 15px;
-  color: #444;
-  line-height: 1.6;
-}
-
-/* Project "Technologies" header (centered) */
-details.project-item .skills-header {
-  text-align: center;
-  color: #4b5fd9;
-  font-weight: 700;
-  font-size: 1.05em;
-  margin: 18px 0 10px 0;
-  letter-spacing: 0.3px;
-  position: relative;
-}
-details.project-item .skills-header::before {
-  content: "";
-  display: block;
-  height: 1px;
-  width: 80%;
-  margin: 0 auto 10px auto;
-  background: rgba(0, 0, 0, 0.08);
-  border-radius: 1px;
-}
-
-/* Project skills (chips) */
-details.project-item .skills {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px 12px;
-  background: #f6f7ff;
-  border: 1px solid rgba(75, 95, 217, 0.18);
-  border-radius: 12px;
-  padding: 12px 18px;
-}
-
-details.project-item .skill-tag {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 14px;
-  font-size: 0.88em;
-  color: #fff;
-  background: #667eea;
-  border-radius: 9999px;
-  font-weight: 500;
-  text-align: center;
-  white-space: nowrap;
-  transition: background 0.25s ease;
-}
-details.project-item .skill-tag:hover { background: #4b5fd9; }
-
-/* ===================================================================== */
-/* ========== Mobile gutters ========================================== */
+/* ========== Mobile adjustments ====================================== */
 /* ===================================================================== */
 @media (max-width: 640px) {
   :root { --card-pad-left: 32px; --card-pad-right: 16px; }
