@@ -57,6 +57,7 @@ h2 {
 .skills { display: flex; flex-wrap: wrap; gap: 10px; }
 .skill-tag { background:#667eea; color:#fff; padding:8px 15px; border-radius:20px; font-size:.9em; }
 
+/* default list spacing (for non-collapsible areas) */
 ul { margin-left: 20px; margin-top: 10px; }
 
 /* ========== Footer ========== */
@@ -92,18 +93,13 @@ details.experience-item summary {
   align-items: center;
   padding: 16px 20px;
   list-style: none;
-  background-color: #eaebf2;        /* <<< distinct header background */
+  background-color: #eaebf2;        /* distinct header background */
   border-bottom: 1px solid rgba(0,0,0,0.06);
   transition: background-color 0.2s ease;
 }
 
-/* Hover and open states for extra clarity */
-details.experience-item summary:hover {
-  background-color: #eef2ff;
-}
-details[open].experience-item summary {
-  background-color: #eef2ff;
-}
+details.experience-item summary:hover { background-color: #eef2ff; }
+details[open].experience-item summary { background-color: #eef2ff; }
 
 details.experience-item summary::-webkit-details-marker { display: none; }
 details.experience-item summary::marker { content: ""; }
@@ -139,15 +135,112 @@ details.experience-item .date { color: #667eea; font-style: italic; font-size: 0
 
 /* Body list area (stays white so it contrasts with header) */
 details.experience-item ul {
-  margin: 10px 20px 20px 40px;
+  margin: 10px 20px 20px 40px;  /* more left space for breathing room */
   background: #fff;
   padding-top: 10px;
+}
+
+/* Rotation subheadings inside experience */
+details.experience-item h5 {
+  font-size: 1.05em;
+  color: #444;
+  text-align: center;      /* center the rotation titles */
+  margin: 15px auto 8px;   /* spacing and auto sides for centering */
+  font-weight: 600;
+  width: 100%;
+}
+
+/* Inline tag/pill next to headings (e.g., Remote/Onsite) */
+.tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: #fff;
+  background-color: #667eea;
+  border-radius: 12px;
+  vertical-align: middle;
 }
 
 /* Simple fade-in for content on open */
 details.experience-item[open] ul {
   animation: fadeIn 0.25s ease-in-out;
 }
+
+/* ===================================================================== */
+/* ========== Collapsible Education (details/summary) ================== */
+/* ===================================================================== */
+
+details.education-item {
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+/* Education header block (same look as experience) */
+details.education-item summary {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  column-gap: 12px;
+  align-items: center;
+  padding: 16px 20px;
+  list-style: none;
+  background-color: #eaebf2;    /* same distinct header background */
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: background-color 0.2s ease;
+}
+
+details.education-item summary:hover { background-color: #eef2ff; }
+details[open].education-item summary { background-color: #eef2ff; }
+
+details.education-item summary::-webkit-details-marker { display: none; }
+details.education-item summary::marker { content: ""; }
+
+details.education-item summary > * {
+  grid-column: 2;
+  margin: 0;
+}
+
+/* Left-centered arrow */
+details.education-item summary::before {
+  content: "▸";
+  font-size: 1.2em;
+  color: #667eea;
+  justify-self: center;
+  align-self: center;
+  transition: transform 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+  opacity: 0.9;
+}
+
+details[open].education-item summary::before {
+  transform: rotate(90deg);
+  color: #4b5fd9;
+  opacity: 1;
+}
+
+/* Education typography */
+details.education-item h3 { font-size: 1.3em; color: #333; margin-bottom: 4px; }
+details.education-item h4 { font-size: 1.05em; font-weight: 500; color: #555; margin-bottom: 3px; }
+details.education-item .date { color: #667eea; font-style: italic; font-size: 0.95em; }
+
+/* Education body content */
+details.education-item .education-body {
+  padding: 15px 25px 20px 45px;
+  background: #fff;
+}
+
+details.education-item[open] .education-body {
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+/* ===================================================================== */
+/* ========== Animation Keyframes ====================================== */
+/* ===================================================================== */
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-4px); }
