@@ -81,7 +81,7 @@ Your site will be live shortly at:
 
 * 🖼️ Add a favicon → `assets/images/favicon.png`
 * 📊 Integrate Google Analytics or Plausible
-* 🧾 Export as PDF directly from browser (print-optimized)
+* 🧾 Export as PDF directly from browser (print-optimized) (Added)
 * 📥 Add a “Download Résumé” button using `<a download>`
 * 🌗 Add dark mode support with a simple CSS toggle
 
