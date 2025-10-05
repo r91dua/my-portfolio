@@ -69,42 +69,52 @@ footer { background:#333; color:#fff; text-align:center; padding:20px; }
   .contact-info { flex-direction: column; align-items: center; }
 }
 
-/* ========== Collapsible Experience (details/summary) ========== */
+/* ===================================================================== */
+/* ========== Collapsible Experience (details/summary) ================= */
+/* ===================================================================== */
+
+/* Card container */
 details.experience-item {
   border: 1px solid rgba(0,0,0,0.1);
   border-radius: 10px;
   margin-bottom: 20px;
-  background: #fff;
+  background: #fff;                 /* Body stays white */
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   overflow: hidden;
 }
 
-/* Header block */
+/* Header block (title/company/date) — clearly different background */
 details.experience-item summary {
   cursor: pointer;
   display: grid;
-  grid-template-columns: 24px 1fr;
+  grid-template-columns: 24px 1fr;  /* [arrow] [stacked text] */
   column-gap: 12px;
   align-items: center;
   padding: 16px 20px;
   list-style: none;
-  background: linear-gradient(135deg, rgba(102,126,234,0.08), rgba(118,75,162,0.08));
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  transition: background 0.3s ease;
+  background-color: #f6f8ff;        /* <<< distinct header background */
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: background-color 0.2s ease;
 }
 
+/* Hover and open states for extra clarity */
 details.experience-item summary:hover {
-  background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15));
+  background-color: #eef2ff;
+}
+details[open].experience-item summary {
+  background-color: #eef2ff;
 }
 
 details.experience-item summary::-webkit-details-marker { display: none; }
+details.experience-item summary::marker { content: ""; }
 
+/* Keep h3/h4/date stacked in the second column */
 details.experience-item summary > * {
   grid-column: 2;
   margin: 0;
 }
 
-/* Left-centered arrow */
+/* Left-centered arrow in the first column */
 details.experience-item summary::before {
   content: "▸";
   font-size: 1.2em;
@@ -112,44 +122,31 @@ details.experience-item summary::before {
   justify-self: center;
   align-self: center;
   transition: transform 0.25s ease, color 0.25s ease, opacity 0.25s ease;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
-/* Arrow rotates when open */
+/* Rotate/tint when open */
 details[open].experience-item summary::before {
   transform: rotate(90deg);
   color: #4b5fd9;
   opacity: 1;
 }
 
-/* Keep typography consistent */
-details.experience-item h3 {
-  font-size: 1.3em;
-  color: #333;
-  margin-bottom: 4px;
-}
-details.experience-item h4 {
-  font-size: 1.05em;
-  font-weight: 500;
-  color: #555;
-  margin-bottom: 3px;
-}
-details.experience-item .date {
-  color: #667eea;
-  font-style: italic;
-  font-size: 0.95em;
-}
+/* Typography inside summary (keeps your original look) */
+details.experience-item h3 { font-size: 1.3em; color: #333; margin-bottom: 4px; }
+details.experience-item h4 { font-size: 1.05em; font-weight: 500; color: #555; margin-bottom: 3px; }
+details.experience-item .date { color: #667eea; font-style: italic; font-size: 0.95em; }
 
-/* Bullet list body */
+/* Body list area (stays white so it contrasts with header) */
 details.experience-item ul {
   margin: 10px 20px 20px 40px;
   background: #fff;
-  border-top: 1px solid rgba(0,0,0,0.05);
   padding-top: 10px;
 }
 
+/* Simple fade-in for content on open */
 details.experience-item[open] ul {
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.25s ease-in-out;
 }
 
 @keyframes fadeIn {
