@@ -198,6 +198,15 @@ details.education-item[open]  > :not(summary) {
   animation: fadeIn 0.25s ease-in-out;
 }
 
+.skills-header {
+  font-size: 1.1em;
+  color: #667eea;
+  font-weight: 600;
+  margin: 15px 0 8px 40px; /* aligns with list indent inside the card */
+  border-left: 3px solid #667eea;
+  padding-left: 10px;
+}
+
 /* ===================================================================== */
 /* ========== Animation Keyframes ====================================== */
 /* ===================================================================== */
