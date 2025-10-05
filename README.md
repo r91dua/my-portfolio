@@ -1,4 +1,4 @@
-# 🌐 Resume Template — by [Rajat Dua](https://www.linkedin.com/in/rajatdua1991/)
+# 🌐 Resume Template — by [Rajat Dua](https://www.linkedin.com/in/rajatdua91/)
 
 A **modern, responsive résumé website** built entirely with **HTML, CSS**, and a touch of **Liquid templating** — perfect for GitHub Pages or Jekyll.  
 Fork this repo to create your own **personal or professional résumé site** in minutes.
