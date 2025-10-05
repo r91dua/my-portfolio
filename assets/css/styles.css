@@ -282,7 +282,6 @@ details.education-item  ul + .skills-header::before,
 details.project-item    ul + .skills-header::before {
   content: "";
   display: block;
-  height: 1px;
   background: rgba(0,0,0,0.08);
   margin: 0 var(--card-pad-right) 12px var(--card-pad-left);
   border-radius: 1px;
