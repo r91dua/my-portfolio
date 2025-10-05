@@ -22,96 +22,45 @@ footer{background:#333;color:#fff;text-align:center;padding:20px}
   .content{padding:20px}
   .contact-info{flex-direction:column;align-items:center}
 }
-/* Collapsible experience styles */
-.experience-item {
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 12px;
-  margin-bottom: 16px;
-  background: #fff;
-  overflow: hidden;
-}
-
-.experience-item summary {
-  list-style: none; /* hide default marker in some browsers */
-  cursor: pointer;
-  padding: 16px 18px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  row-gap: 4px;
-  align-items: center;
-}
-
-.experience-item summary::-webkit-details-marker { display: none; }
-
-.experience-item summary .role {
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: #333;
-  display: block;
-}
-
-.experience-item summary .company {
-  color: #555;
-  font-weight: 500;
-  margin-right: 12px;
-}
-
-.experience-item summary .date {
-  color: #667eea;
-  font-size: 0.95rem;
-}
-
-.experience-item[open] summary {
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  background: linear-gradient(135deg, rgba(102,126,234,0.06), rgba(118,75,162,0.06));
-}
-
-.experience-item .details-body {
-  padding: 14px 20px 18px;
-}
-
-.experience-item ul { margin: 8px 0 0 18px; }
-
-.experience-item summary:after {
-  content: "▸";
-  justify-self: end;
-  transition: transform 0.2s ease;
-  font-size: 1.1rem;
-  opacity: 0.7;
-}
-
-.experience-item[open] summary:after {
-  transform: rotate(90deg);
-  opacity: 0.9;
-}
+/* Collapsible experience styling */
 details.experience-item {
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   margin-bottom: 20px;
   background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 details.experience-item summary {
   cursor: pointer;
-  padding: 16px 20px;
+  padding: 16px 20px 16px 45px; /* add left padding for the arrow */
   list-style: none;
+  position: relative;
 }
 
 details.experience-item summary::-webkit-details-marker {
   display: none;
 }
 
-details.experience-item summary::after {
+/* ▸ Arrow icon — now on the LEFT */
+details.experience-item summary::before {
   content: "▸";
-  float: right;
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 1.2em;
   color: #667eea;
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, color 0.25s ease;
+  opacity: 0.8;
 }
 
-details[open].experience-item summary::after {
-  transform: rotate(90deg);
+/* Rotate the arrow when expanded */
+details[open].experience-item summary::before {
+  transform: translateY(-50%) rotate(90deg);
+  opacity: 1;
+  color: #4b5fd9;
 }
 
 details.experience-item h3 {
@@ -142,7 +91,13 @@ details.experience-item[open] ul {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
