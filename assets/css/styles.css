@@ -1,100 +1,329 @@
-/* ========== Base Reset & Layout ========== */
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;color:#333;background:#f4f4f4}
-.container{max-width:1000px;margin:0 auto;background:#fff;box-shadow:0 0 20px rgba(0,0,0,.1)}
-/* Header */
-header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:60px 40px;text-align:center}
-header h1{font-size:2.5em;margin-bottom:10px}
-header p{font-size:1.2em;margin-bottom:20px}
-.contact-info{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
-.contact-info a{color:#fff;text-decoration:none;padding:8px 15px;background:rgba(255,255,255,.2);border-radius:5px;transition:.3s}
-.contact-info a:hover{background:rgba(255,255,255,.3)}
-/* Content */
-.content{padding:40px}
-section{margin-bottom:40px}
-h2{color:#667eea;font-size:1.8em;margin-bottom:20px;padding-bottom:10px;border-bottom:3px solid #667eea}
-/* Legacy spacing */
-.experience-item,.education-item,.project-item{margin-bottom:25px}
-.experience-item h3,.education-item h3,.project-item h3{color:#333;font-size:1.3em;margin-bottom:5px}
-.date{color:#666;font-style:italic;margin-bottom:10px}
-/* Global Skills (outside cards) */
-.skills{display:flex;flex-wrap:wrap;gap:10px}
-.skill-tag{background:#667eea;color:#fff;padding:8px 15px;border-radius:20px;font-size:.9em;display:inline-flex;align-items:center;justify-content:center;line-height:1;white-space:nowrap}
-/* Lists (outside cards) */
-ul{margin-left:20px;margin-top:10px}
-/* Footer */
-footer{background:#333;color:#fff;text-align:center;padding:20px}
-/* Responsive */
-@media (max-width:768px){header h1{font-size:2em}.content{padding:20px}.contact-info{flex-direction:column;align-items:center}}
-
-/* =================================================================== */
-/* Collapsible Cards (Experience + Education) */
-/* =================================================================== */
-details.experience-item,details.education-item{
-  --card-pad-left:45px;--card-pad-x:22px;
-  border:1px solid rgba(0,0,0,.1);border-radius:10px;margin-bottom:20px;background:#fff;
-  box-shadow:0 2px 4px rgba(0,0,0,.05);overflow:hidden
-}
-/* Header */
-details.experience-item summary,details.education-item summary{
-  cursor:pointer;display:grid;grid-template-columns:24px 1fr;column-gap:12px;align-items:center;
-  padding:16px 20px;list-style:none;background:#eaebf2;border-bottom:1px solid rgba(0,0,0,.06);transition:background-color .2s ease
-}
-details.experience-item summary:hover,details.education-item summary:hover{background:#eef2ff}
-details[open].experience-item summary,details[open].education-item summary{background:#eef2ff}
-details.experience-item summary::-webkit-details-marker,details.education-item summary::-webkit-details-marker{display:none}
-details.experience-item summary::marker,details.education-item summary::marker{content:""}
-/* Header layout/text */
-details.experience-item summary>*,
-details.education-item summary>*{grid-column:2;margin:0}
-details.experience-item summary::before,details.education-item summary::before{
-  content:"▸";font-size:1.2em;color:#667eea;justify-self:center;align-self:center;opacity:.9;
-  transition:transform .25s ease,color .25s ease,opacity .25s ease
-}
-details[open].experience-item summary::before,details[open].education-item summary::before{transform:rotate(90deg);color:#4b5fd9;opacity:1}
-/* Header typography */
-details.experience-item h3,details.education-item h3{font-size:1.3em;color:#333;margin-bottom:4px}
-details.experience-item h4,details.education-item h4{font-size:1.05em;font-weight:500;color:#555;margin-bottom:3px}
-details.experience-item .date,details.education-item .date{color:#667eea;font-style:italic;font-size:.95em}
-/* Card body padding */
-details.experience-item>:not(summary),details.education-item>:not(summary){
-  padding:14px var(--card-pad-x) 18px var(--card-pad-left);background:#fff;border-top:1px solid rgba(0,0,0,.05)
-}
-/* Lists inside cards */
-details.experience-item ul,details.education-item ul{margin:6px 8px 14px 6px;padding-left:18px}
-/* Rotations */
-details.experience-item h5{font-size:1.05em;color:#444;text-align:center;margin:15px auto 8px;font-weight:600;width:100%}
-/* Inline tag pills */
-.tag{display:inline-flex;align-items:center;justify-content:center;margin-left:8px;padding:2px 8px;font-size:.8em;font-weight:600;color:#fff;background:#667eea;border-radius:12px;vertical-align:middle;line-height:1}
-
-/* =================================================================== */
-/* Skills inside cards */
-/* =================================================================== */
-details.experience-item .skills-header,details.education-item .skills-header{
-  font-size:1.1em;line-height:1.25;color:#667eea;font-weight:700;margin:10px 0 8px;padding:0;border:0
-}
-/* optional divider when following a list */
-details.experience-item ul+.skills-header,details.education-item ul+.skills-header{position:relative;margin-top:14px}
-details.experience-item ul+.skills-header::before,details.education-item ul+.skills-header::before{
-  content:"";display:block;height:1px;background:rgba(0,0,0,.06);margin:0 0 12px
-}
-/* Skills grid panel */
-details.experience-item .skills,details.education-item .skills{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px 10px;padding:12px;margin:0;
-  background:#f7f8ff;border:1px solid rgba(0,0,0,.06);border-radius:10px;align-items:center
-}
-/* Centered chip text inside cards */
-details.experience-item .skill-tag,details.education-item .skill-tag{
-  font-size:.86em;padding:6px 10px;border-radius:16px;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;line-height:1
+/* ===========================================================
+   Base Reset & Layout
+   =========================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Animations */
-@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
-details.experience-item[open]>*:not(summary),details.education-item[open]>*:not(summary){animation:fadeIn .25s ease-in-out}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #f4f4f4;
+}
 
-/* Responsive chips */
-@media (max-width:640px){
-  details.experience-item>:not(summary),details.education-item>:not(summary){padding:12px 16px 16px 42px}
-  details.experience-item .skills,details.education-item .skills{grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;padding:10px}
-  details.experience-item .skill-tag,details.education-item .skill-tag{font-size:.84em;padding:6px 9px}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0,0,0,.1);
+}
+
+/* ===========================================================
+   Header
+   =========================================================== */
+header {
+  background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  color: #fff;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.contact-info a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 15px;
+  background: rgba(255,255,255,.2);
+  border-radius: 5px;
+  transition: .3s;
+}
+
+.contact-info a:hover {
+  background: rgba(255,255,255,.3);
+}
+
+/* ===========================================================
+   Content Sections
+   =========================================================== */
+.content {
+  padding: 40px;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+h2 {
+  color: #667eea;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #667eea;
+}
+
+.date {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+ul {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+/* ===========================================================
+   Footer
+   =========================================================== */
+footer {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+/* ===========================================================
+   Responsive
+   =========================================================== */
+@media (max-width: 768px) {
+  header h1 { font-size: 2em; }
+  .content  { padding: 20px; }
+  .contact-info { flex-direction: column; align-items: center; }
+}
+
+/* ===========================================================
+   Collapsible Card Styling (Experience & Education)
+   =========================================================== */
+details.experience-item,
+details.education-item {
+  --pad-left: 45px;
+  --pad-x: 22px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+  margin-bottom: 24px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+/* Header / Summary */
+details.experience-item summary,
+details.education-item summary {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  column-gap: 12px;
+  align-items: center;
+  padding: 16px 20px;
+  background: #eef1ff;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  list-style: none;
+}
+
+details.experience-item summary::-webkit-details-marker,
+details.education-item summary::-webkit-details-marker { display: none; }
+
+details.experience-item summary::before,
+details.education-item summary::before {
+  content: "▸";
+  font-size: 1.2em;
+  color: #667eea;
+  justify-self: center;
+  align-self: center;
+  transition: transform 0.25s ease, color 0.25s ease;
+  opacity: 0.9;
+}
+
+details[open].experience-item summary::before,
+details[open].education-item summary::before {
+  transform: rotate(90deg);
+  color: #4b5fd9;
+  opacity: 1;
+}
+
+details.experience-item summary > *,
+details.education-item summary > * {
+  grid-column: 2;
+  margin: 0;
+}
+
+/* Typography */
+details.experience-item h3,
+details.education-item h3 {
+  font-size: 1.3em;
+  color: #222;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+details.experience-item h4,
+details.education-item h4 {
+  font-size: 1.05em;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 2px;
+}
+
+details.experience-item .date,
+details.education-item .date {
+  color: #667eea;
+  font-style: italic;
+  font-size: 0.95em;
+}
+
+/* Body padding */
+details.experience-item > :not(summary),
+details.education-item  > :not(summary) {
+  padding: 14px var(--pad-x) 18px var(--pad-left);
+  background: #fff;
+}
+
+/* List alignment */
+details.experience-item ul,
+details.education-item ul {
+  margin: 8px 12px 16px 6px;
+  padding-left: 18px;
+}
+
+/* Rotation Subheadings */
+details.experience-item h5 {
+  font-size: 1.05em;
+  color: #444;
+  text-align: center;
+  margin: 15px auto 8px;
+  font-weight: 600;
+}
+
+/* Inline Tag / Pill */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  padding: 2px 8px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: #fff;
+  background-color: #667eea;
+  border-radius: 12px;
+}
+
+/* ===========================================================
+   Skills Section inside Cards (improved)
+   =========================================================== */
+
+/* Skills header */
+details.experience-item .skills-header,
+details.education-item  .skills-header {
+  font-size: 1.05em;
+  font-weight: 700;
+  color: #4b5fd9;
+  margin: 14px 0 10px;
+  padding: 0;
+}
+
+/* Divider when skills follow a list */
+details.experience-item ul + .skills-header::before,
+details.education-item  ul + .skills-header::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+  margin-bottom: 12px;
+  border-radius: 1px;
+}
+
+/* Skills container */
+details.experience-item .skills,
+details.education-item  .skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  padding: 12px 14px;
+  margin: 0;
+  background: #f6f7ff;
+  border: 1px solid rgba(75,95,217,0.18);
+  border-radius: 10px;
+}
+
+/* Individual skill tag */
+details.experience-item .skill-tag,
+details.education-item  .skill-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  font-size: 0.9em;
+  line-height: 1.15;
+  white-space: nowrap;
+  border-radius: 9999px;
+  color: #2e3ba8;
+  background: rgba(102,126,234,0.16);
+  border: 1px solid rgba(102,126,234,0.3);
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
+}
+
+details.experience-item .skill-tag:hover,
+details.education-item  .skill-tag:hover {
+  background: rgba(102,126,234,0.25);
+  border-color: rgba(102,126,234,0.4);
+}
+
+details.experience-item .skill-tag:active,
+details.education-item  .skill-tag:active {
+  transform: translateY(0.5px);
+}
+
+/* ===========================================================
+   Animations
+   =========================================================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+details.experience-item[open] > :not(summary),
+details.education-item[open]  > :not(summary) {
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+/* ===========================================================
+   Responsive Adjustments for Chips
+   =========================================================== */
+@media (max-width: 640px) {
+  details.experience-item > :not(summary),
+  details.education-item  > :not(summary) {
+    padding: 12px 16px 16px 42px;
+  }
+
+  details.experience-item .skills,
+  details.education-item  .skills {
+    gap: 8px 10px;
+    padding: 10px 12px;
+  }
+
+  details.experience-item .skill-tag,
+  details.education-item  .skill-tag {
+    font-size: 0.85em;
+    padding: 6px 10px;
+  }
 }
