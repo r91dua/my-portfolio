@@ -1,0 +1,35 @@
+<script>
+  function printResume() {
+    // Remember which cards were closed
+    const details = Array.from(document.querySelectorAll('details'));
+    const wasOpen = details.map(d => d.open);
+
+    // Open all cards for printing
+    details.forEach(d => d.open = true);
+
+    // Let the layout settle, then print
+    setTimeout(() => {
+      window.print();
+
+      // After print, restore original open/closed states
+      setTimeout(() => {
+        details.forEach((d, i) => d.open = wasOpen[i]);
+      }, 50);
+    }, 50);
+  }
+
+  // Also open all details when user prints via browser menu/shortcut
+  (function ensureOpenOnPrint(){
+    let details, wasOpen;
+    window.addEventListener('beforeprint', () => {
+      details = Array.from(document.querySelectorAll('details'));
+      wasOpen = details.map(d => d.open);
+      details.forEach(d => d.open = true);
+      document.body.classList.add('printing');
+    });
+    window.addEventListener('afterprint', () => {
+      if (details && wasOpen) details.forEach((d, i) => d.open = wasOpen[i]);
+      document.body.classList.remove('printing');
+    });
+  })();
+</script>
