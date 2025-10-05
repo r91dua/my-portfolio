@@ -92,7 +92,7 @@ details.experience-item summary {
   align-items: center;
   padding: 16px 20px;
   list-style: none;
-  background-color: #f6f8ff;        /* <<< distinct header background */
+  background-color: #eaebf2;        /* <<< distinct header background */
   border-bottom: 1px solid rgba(0,0,0,0.06);
   transition: background-color 0.2s ease;
 }
