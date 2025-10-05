@@ -57,7 +57,6 @@ h2 {
 .skills { display: flex; flex-wrap: wrap; gap: 10px; }
 .skill-tag { background:#667eea; color:#fff; padding:8px 15px; border-radius:20px; font-size:.9em; }
 
-/* default list spacing (non-collapsible areas) */
 ul { margin-left: 20px; margin-top: 10px; }
 
 /* ========== Footer ========== */
@@ -71,7 +70,6 @@ footer { background:#333; color:#fff; text-align:center; padding:20px; }
 }
 
 /* ========== Collapsible Experience (details/summary) ========== */
-/* Card container */
 details.experience-item {
   border: 1px solid rgba(0,0,0,0.1);
   border-radius: 10px;
@@ -81,54 +79,75 @@ details.experience-item {
   overflow: hidden;
 }
 
-/* Summary header as a 2-col grid: [arrow][stacked headings] */
+/* Header block */
 details.experience-item summary {
   cursor: pointer;
   display: grid;
   grid-template-columns: 24px 1fr;
   column-gap: 12px;
-  align-items: center;          /* vertically centers the arrow */
-  padding: 16px 20px;           /* even padding; no extra left needed */
+  align-items: center;
+  padding: 16px 20px;
   list-style: none;
+  background: linear-gradient(135deg, rgba(102,126,234,0.08), rgba(118,75,162,0.08));
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background 0.3s ease;
+}
+
+details.experience-item summary:hover {
+  background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15));
 }
 
 details.experience-item summary::-webkit-details-marker { display: none; }
 
-/* Place all header text in column 2 and keep your stacked look */
 details.experience-item summary > * {
   grid-column: 2;
   margin: 0;
 }
 
-/* Keep your original typography within the summary */
-details.experience-item h3 { font-size: 1.3em; color: #333; margin-bottom: 4px; }
-details.experience-item h4 { font-size: 1.05em; font-weight: 500; color: #555; margin-bottom: 3px; }
-details.experience-item .date { color: #667eea; font-style: italic; font-size: 0.95em; }
-
-/* Left-centered arrow indicator in column 1 */
+/* Left-centered arrow */
 details.experience-item summary::before {
   content: "▸";
   font-size: 1.2em;
   color: #667eea;
-  justify-self: center;  /* center horizontally in the arrow column */
-  align-self: center;    /* center vertically */
+  justify-self: center;
+  align-self: center;
   transition: transform 0.25s ease, color 0.25s ease, opacity 0.25s ease;
   opacity: 0.85;
 }
 
-/* Rotate/tint when open */
+/* Arrow rotates when open */
 details[open].experience-item summary::before {
   transform: rotate(90deg);
   color: #4b5fd9;
   opacity: 1;
 }
 
-/* Body list inside details */
-details.experience-item ul {
-  margin: 10px 20px 20px 40px;  /* a bit more left for nice rhythm */
+/* Keep typography consistent */
+details.experience-item h3 {
+  font-size: 1.3em;
+  color: #333;
+  margin-bottom: 4px;
+}
+details.experience-item h4 {
+  font-size: 1.05em;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 3px;
+}
+details.experience-item .date {
+  color: #667eea;
+  font-style: italic;
+  font-size: 0.95em;
 }
 
-/* Simple fade-in for content on open */
+/* Bullet list body */
+details.experience-item ul {
+  margin: 10px 20px 20px 40px;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 10px;
+}
+
 details.experience-item[open] ul {
   animation: fadeIn 0.3s ease-in-out;
 }
