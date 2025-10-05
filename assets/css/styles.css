@@ -149,6 +149,11 @@ details.experience-item[open] ul {
   animation: fadeIn 0.25s ease-in-out;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* Center-align rotation subheadings (e.g., "1st Rotation", "2nd Rotation") */
 details.experience-item h5 {
   font-size: 1.05em;
@@ -157,10 +162,4 @@ details.experience-item h5 {
   margin: 15px auto 8px;   /* top/bottom spacing and auto left/right for centering */
   font-weight: 600;
   width: 100%;
-}
-
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
