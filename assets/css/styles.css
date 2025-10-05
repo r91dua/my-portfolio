@@ -148,7 +148,6 @@ details.experience-item > :not(summary),
 details.education-item  > :not(summary) {
   padding: 10px var(--card-pad-right) 15px var(--card-pad-left);
   background: #fff;
-  border-top: 1px solid rgba(0,0,0,0.05);
 }
 
 /* Bullet lists — aligned */
