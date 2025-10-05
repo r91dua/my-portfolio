@@ -43,7 +43,7 @@ header p  { font-size: 1.2em; margin-bottom: 20px; }
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 100px;
+  gap: 50px;
   text-align: left;
 }
 
