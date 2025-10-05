@@ -337,38 +337,49 @@ details.project-item    .skill-tag:hover { background: #5a6eea; }
 }
 .print-btn:hover { box-shadow: 0 4px 10px rgba(0,0,0,.2); }
 
-/* ===== Print styles ===== */
+/* ===== Print styles (color-accurate) ===== */
 @media print {
-  /* Page size & margins (adjust to 'letter' if you prefer) */
+  /* Page size & margins */
   @page {
     size: A4;
     margin: 12mm;
   }
 
-  /* Remove backgrounds that can waste ink; keep brand color where needed */
-  body {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-    background: #fff !important;
+  /* Force the print engine to keep colors/gradients */
+  html, body, header, .container, .content, section, details, summary {
+    -webkit-print-color-adjust: exact !important; /* Chrome/Safari */
+    print-color-adjust: exact !important;         /* Firefox/Edge */
+    color-adjust: exact !important;
   }
 
+  /* Keep your gradient header in print */
   header {
-    /* Flatten gradient to a soft color for print; or keep it if you prefer */
-    background: #667eea !important;
+    background: linear-gradient(135deg,#667eea 0%,#764ba2 100%) !important;
     color: #fff !important;
     box-shadow: none !important;
   }
 
-  .container, .content, section {
-    background: #fff !important;
+  /* Preserve card header backgrounds (the light purple bar) */
+  details.experience-item summary,
+  details.education-item summary,
+  details.project-item summary {
+    background: #f3f4fb !important;
+    border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+  }
+
+  /* Body backgrounds should stay white (no grey wash) */
+  .container, .content, section, details > :not(summary) {
+    background: #ffffff !important;
     box-shadow: none !important;
   }
 
   /* Hide interactive-only UI */
   .print-btn,
-  .contact-info a[target="_blank"]::after { display: none !important; }
+  .contact-info a[target="_blank"]::after {
+    display: none !important;
+  }
 
-  /* Ensure collapsible cards don’t split awkwardly across pages */
+  /* Prevent ugly page breaks inside cards */
   details,
   .experience-item,
   .education-item,
@@ -377,28 +388,27 @@ details.project-item    .skill-tag:hover { background: #5a6eea; }
     page-break-inside: avoid;
   }
 
-  /* Tighter spacing for print */
+  /* Tighten spacing for print */
   .content { padding: 0 !important; }
   section { margin-bottom: 18px !important; }
   h2 { margin: 0 0 10px !important; padding-bottom: 6px !important; border-bottom-width: 2px !important; }
 
-  /* Lists & tags */
+  /* Lists & chips */
   ul { margin: 6px 0 8px 20px !important; }
-  .skills, .project-tags {
-    border: 1px solid #ccc !important;
-    background: #fafafa !important;
+  .skills, .project-tags, details .skills {
+    border: 1px solid #d9defe !important;
+    background: #f6f7ff !important;
   }
 
-  /* Avoid widows/orphans if browser supports it */
+  /* Keep your brand accents readable */
+  h2, .skills-header { color: #4b5fd9 !important; }
+  .skill-tag, .project-tags .tag {
+    background: #667eea !important;
+    color: #fff !important;
+  }
+
+  /* Avoid widows/orphans if supported */
   p, li, h3, h4 { orphans: 2; widows: 2; }
-
-  /* Remove page scroll-only visuals */
-  .container { box-shadow: none !important; }
-}
-
-/* When printing via script, you can tweak specifics */
-body.printing header {
-  background: #667eea !important;
 }
 
 /* ===================================================================== */
