@@ -144,13 +144,6 @@ details.experience-item ul {
   padding-top: 10px;
 }
 
-/* Fine-tune spacing for inner lists and rotation headings */
-details.experience-item h5 {
-  font-size: 1.05em;
-  color: #444;
-  margin: 15px 0 5px 20px;   /* add a left margin so it’s not right on the edge */
-}
-
 /* Simple fade-in for content on open */
 details.experience-item[open] ul {
   animation: fadeIn 0.25s ease-in-out;
