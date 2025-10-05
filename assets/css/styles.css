@@ -234,14 +234,16 @@ details.experience-item h5 {
 /* Skills header */
 details.experience-item .skills-header,
 details.education-item  .skills-header {
-  font-size: 1.05em;
+  font-size: 1.1em;
   font-weight: 700;
   color: #4b5fd9;
-  margin: 14px 0 10px;
-  padding: 0;
+  margin: 12px 0 10px;
+  padding-left: 45px;  /* <<< matches body indentation */
+  display: flex;
+  align-items: center;
 }
 
-/* Divider when skills follow a list */
+/* Divider before skills */
 details.experience-item ul + .skills-header::before,
 details.education-item  ul + .skills-header::before {
   content: "";
@@ -250,6 +252,8 @@ details.education-item  ul + .skills-header::before {
   background: rgba(0,0,0,0.08);
   margin-bottom: 12px;
   border-radius: 1px;
+  width: calc(100% - 60px);
+  margin-left: 45px;
 }
 
 /* Skills container */
@@ -258,8 +262,8 @@ details.education-item  .skills {
   display: flex;
   flex-wrap: wrap;
   gap: 10px 12px;
-  padding: 12px 14px;
-  margin: 0;
+  padding: 12px 20px 12px 45px; /* aligned with content */
+  margin-bottom: 10px;
   background: #f6f7ff;
   border: 1px solid rgba(75,95,217,0.18);
   border-radius: 10px;
@@ -271,15 +275,16 @@ details.education-item  .skill-tag {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 14px;
+  padding: 8px 16px;
   font-size: 0.9em;
-  line-height: 1.15;
-  white-space: nowrap;
+  font-weight: 500;
   border-radius: 9999px;
   color: #2e3ba8;
   background: rgba(102,126,234,0.16);
   border: 1px solid rgba(102,126,234,0.3);
   transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
+  text-align: center;
+  min-width: fit-content;
 }
 
 details.experience-item .skill-tag:hover,
@@ -307,23 +312,17 @@ details.education-item[open]  > :not(summary) {
 }
 
 /* ===========================================================
-   Responsive Adjustments for Chips
+   Responsive Adjustments
    =========================================================== */
 @media (max-width: 640px) {
-  details.experience-item > :not(summary),
-  details.education-item  > :not(summary) {
-    padding: 12px 16px 16px 42px;
-  }
-
   details.experience-item .skills,
   details.education-item  .skills {
+    padding-left: 32px;
     gap: 8px 10px;
-    padding: 10px 12px;
   }
 
-  details.experience-item .skill-tag,
-  details.education-item  .skill-tag {
-    font-size: 0.85em;
-    padding: 6px 10px;
+  details.experience-item .skills-header,
+  details.education-item  .skills-header {
+    padding-left: 32px;
   }
 }
