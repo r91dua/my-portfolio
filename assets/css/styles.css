@@ -60,7 +60,6 @@ footer { background:#333; color:#fff; text-align:center; padding:20px; }
 
 details.experience-item,
 details.education-item {
-  border: 1px solid rgba(0,0,0,0.1);
   border-radius: 10px;
   margin-bottom: 20px;
   background: #fff;
