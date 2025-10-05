@@ -140,7 +140,7 @@ details.education-item  summary .date {
 
 /* Card body gutters */
 :root {
-  --card-pad-left: 50px;
+  --card-pad-left: 28px;
   --card-pad-right: 28px;
 }
 
