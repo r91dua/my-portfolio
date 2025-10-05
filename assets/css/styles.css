@@ -55,6 +55,7 @@ h2 {
 
 .date { color: #666; font-style: italic; margin-bottom: 10px; }
 
+/* Global Skills section (separate from card skills) */
 .skills { display: flex; flex-wrap: wrap; gap: 10px; }
 .skill-tag { background:#667eea; color:#fff; padding:8px 15px; border-radius:20px; font-size:.9em; }
 
@@ -198,13 +199,70 @@ details.education-item[open]  > :not(summary) {
   animation: fadeIn 0.25s ease-in-out;
 }
 
-.skills-header {
+/* ===================================================================== */
+/* ========== Skills block INSIDE cards (Experience & Education) ======= */
+/* ===================================================================== */
+
+/* Card body padding harmonized (skills, lists, paragraphs, etc.) */
+details.experience-item > :not(summary),
+details.education-item  > :not(summary) {
+  padding: 14px 22px 18px 45px; /* align with left arrow column */
+}
+
+/* Tidy bullet lists inside cards */
+details.experience-item ul,
+details.education-item  ul {
+  margin: 6px 8px 14px 6px;   /* relative to padded body above */
+  padding-left: 18px;         /* keep bullets readable */
+}
+
+/* "Skills" header line inside cards */
+details.experience-item .skills-header,
+details.education-item  .skills-header {
   font-size: 1.1em;
+  line-height: 1.25;
   color: #667eea;
-  font-weight: 600;
-  margin: 15px 0 8px 40px; /* aligns with list indent inside the card */
-  border-left: 3px solid #667eea;
-  padding-left: 10px;
+  font-weight: 700;
+  margin: 12px 0 8px;         /* no extra left margin; aligns with body padding */
+  padding: 0;
+  border: 0;
+}
+
+/* Optional subtle divider above the skills header if following a list */
+details.experience-item ul + .skills-header,
+details.education-item  ul + .skills-header {
+  position: relative;
+  margin-top: 16px;
+}
+details.experience-item ul + .skills-header::before,
+details.education-item  ul + .skills-header::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: rgba(0,0,0,0.06);
+  margin: 0 0 12px;
+}
+
+/* Skills container in cards: neat grid of chips */
+details.experience-item .skills,
+details.education-item  .skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px 10px;
+  padding: 12px;
+  margin: 0;                    /* rely on card body padding */
+  background: #f7f8ff;         /* soft contrast */
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 10px;
+}
+
+/* Slightly smaller chips inside cards so they flow nicely */
+details.experience-item .skill-tag,
+details.education-item  .skill-tag {
+  font-size: 0.86em;
+  padding: 6px 10px;
+  border-radius: 16px;
+  white-space: nowrap;
 }
 
 /* ===================================================================== */
@@ -214,4 +272,25 @@ details.education-item[open]  > :not(summary) {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-4px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================ */
+/* Responsive tweaks for chips  */
+/* ============================ */
+@media (max-width: 640px) {
+  details.experience-item > :not(summary),
+  details.education-item  > :not(summary) {
+    padding: 12px 16px 16px 42px;
+  }
+  details.experience-item .skills,
+  details.education-item  .skills {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+    padding: 10px;
+  }
+  details.experience-item .skill-tag,
+  details.education-item  .skill-tag {
+    font-size: 0.84em;
+    padding: 6px 9px;
+  }
 }
